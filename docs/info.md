@@ -9,11 +9,11 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This digital Leaky Integrate-and-Fire (LIF) neuron integrates 8-bit input current into an internal state while applying a 50% "leak" via a bitwise right-shift. When the membrane potential reaches the hardcoded threshold of 200, the circuit triggers a spike signal on the uio_out[7] pin.
 
 ## How to test
 
-Explain how to use your project
+To test the design, apply a high input value to ui_in and monitor the 8-bit state on uo_out to see the potential rise and fire.
 
 ## External hardware
 
