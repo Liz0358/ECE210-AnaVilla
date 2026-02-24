@@ -5,16 +5,16 @@ module lif(
     input wire          clk,
     input wire          reset_n,
     output reg [7:0]    state,
-    output wire         spike,
+    output wire         spike
 );
 
     wire [7:0] next_state;
-    reg [7:0] thershold;
+    reg [7:0] threshold;
 
     always @(posedge clk) begin
         if (!reset_n) begin
             state <= 0;
-            thresehold <= 200;
+            threshold <= 200;
         end else begin
             state <= next_state;
         end
@@ -24,7 +24,7 @@ module lif(
     assign next_state = current + (state >> 1);
 
     // spiking logic
-    assign spike = (state >= thresehold);
+    assign spike = (state >= threshold);
 
 endmodule
 
