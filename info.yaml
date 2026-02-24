@@ -3,7 +3,7 @@ project:
   title:        "A simple leaky integrate and fire neuron"      # Project title
   author:       "Ana Villa"      # Your name
   discord:      "Liz0358"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
+  description:  "An 8-bit digital Leaky Integrate-and-Fire (LIF) neuron that integrates input current and spikes upon reaching a threshold"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
