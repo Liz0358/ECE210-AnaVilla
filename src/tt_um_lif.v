@@ -24,6 +24,6 @@ module tt_um_lif (
   wire _unused = &{ena, 1'b0, uio_in};
 
   // instantiate leaky integrate
-  lif lif1 (.current(ui_in), .clk(clk), .reset_n(rst_n), state(uo_out), spike(uio_out[7]))
+  lif lif1 (.current(ui_in), .clk(clk), .reset_n(rst_n), state(uo_out), spike(uio_out[7]));
 
 endmodule
