@@ -1,4 +1,4 @@
-`default_nettype
+`default_nettype none
 
 module lif(
     input wire [7:0]    current,
@@ -8,7 +8,7 @@ module lif(
     output wire         spike,
 );
 
-    wire [7:0] next state;
+    wire [7:0] next_state;
     reg [7:0] thershold;
 
     always @(posedge clk) begin
