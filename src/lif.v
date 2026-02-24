@@ -1,4 +1,4 @@
-'default_nettype
+`default_nettype
 
 module lif(
     input wire [7:0]    current,
@@ -6,7 +6,7 @@ module lif(
     input wire          reset_n,
     output reg [7:0]    state,
     output wire         spike,
-)
+);
 
     wire [7:0] next state;
     reg [7:0] thershold;
