@@ -10,7 +10,7 @@ async def test_oscillator_network(dut):
     dut._log.info("Starting LIF Oscillator Network Test")
 
     # Set clock to 20ns (50MHz) to match config.json CLOCK_PERIOD
-    clock = Clock(dut.clk, 20, units="ns") 
+    clock = Clock(dut.clk, 20, unit="ns")
     cocotb.start_soon(clock.start())
 
     # Reset the system
@@ -30,7 +30,7 @@ async def test_oscillator_network(dut):
     # We expect to see sp1, then sp2, then sp3, then sp4 in order
     for i in range(100):
         await RisingEdge(dut.clk)
-        spikes = dut.uio_out.value >> 4 # Spikes are mapped to uio_out[7:4]
+        spikes = int(dut.uio_out.value) >> 4 # Spikes are mapped to uio_out[7:4]
         if spikes > 0:
             dut._log.info(f"Cycle {i}: Spike pattern detected: {bin(int(spikes))}")
 

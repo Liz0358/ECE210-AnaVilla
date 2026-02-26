@@ -17,12 +17,11 @@ module tt_um_Oscillator(
 );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out [6:0]= 0;
   assign uio_oe  = 1;
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, 1'b0, uio_in, s2, s3, s4};
-  
+
   // Signal wires to connect the neurons in a ring
   wire [7:0] s1, s2, s3, s4; // Internal states
   wire sp1, sp2, sp3, sp4;   // Individual spikes
