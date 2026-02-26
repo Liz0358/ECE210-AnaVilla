@@ -1,42 +1,18 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+## How it works
 
-# Tiny Tapeout Verilog Project Template
+This project implements a **4-neuron Ring Oscillator Network** based on the digital Leaky Integrate-and-Fire (LIF) model. Each individual neuron integrates an 8-bit input current into its internal membrane potential (`state`) while applying a 50% "leak" every clock cycle via a bitwise right-shift (`state >> 1`)
 
-- [Read the documentation for project](docs/info.md)
+The neurons are connected in a loop to create a sequential firing pattern:
+* **Integration & Leak**: Each neuron adds the `current` input to half of its previous `state`
+* **Threshold & Spike**: When a neuron's potential reaches the threshold of **200**, it triggers a `spike`.
+* **Reset-after-Spike**: Upon spiking, the neuron's state resets to **0** to allow for the next integration cycle
+* **Synaptic Coupling**: The `spike` from one neuron acts as a "kick," adding a large value (**8'd150**) to the `current` input of the next neuron in the ring
 
-## What is Tiny Tapeout?
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
 
-To learn more and get started, visit https://tinytapeout.com.
+## How to test
 
-## Set up your Verilog project
-
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
-
-The GitHub action will automatically build the ASIC files using [LibreLane](https://www.zerotoasiccourse.com/terminology/librelane/).
-
-## Enable GitHub actions to build the results page
-
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
-
-## Resources
-
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
-
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
-  - Bluesky [@tinytapeout.com](https://bsky.app/profile/tinytapeout.com)
+1.  **Initialize**: Apply a low signal to `rst_n` to clear all neuron states to 0
+2.  **Start the Wave**: Set the base input current `ui_in` (pins 0-7) to a value between **50 and 70**. This provides the necessary "bias" so that the combined current (bias + 150 kick) is enough to cross the threshold
+3.  **Monitor Spikes**: Observe pins `uio_out[7:4]`. You should see the four spike bits flash in a sequential sequence as the activity rotates through the network
+4.  **Observe Potential**: Monitor the 8-bit `uo_out` port to see the real-time membrane potential of the first neuron rising and resetting
