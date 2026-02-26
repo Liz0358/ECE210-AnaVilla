@@ -1,3 +1,5 @@
+![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+
 ## How it works
 
 This project implements a **4-neuron Ring Oscillator Network** based on the digital Leaky Integrate-and-Fire (LIF) model. Each individual neuron integrates an 8-bit input current into its internal membrane potential (`state`) while applying a 50% "leak" every clock cycle via a bitwise right-shift (`state >> 1`)
