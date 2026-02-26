@@ -1,24 +1,23 @@
 # Tiny Tapeout project information
 project:
-  title:        "A simple leaky integrate and fire neuron"      # Project title
+  title:        "4-Neuron LIF Oscillator Network"      # Project title
   author:       "Ana Villa"      # Your name
   discord:      "Liz0358"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "An 8-bit digital Leaky Integrate-and-Fire (LIF) neuron that integrates input current and spikes upon reaching a threshold"      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  description:  "A ring oscillator network of 4 Leaky Integrate-and-Fire neurons"  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_lif"
+  top_module:  "tt_um_Oscillator"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "tt_um_lif.v"
-    - "lif.v"
+    - "tt_um_Oscillator.v"
+    - "Oscillator.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
@@ -48,10 +47,10 @@ pinout:
   uio[1]: ""
   uio[2]: ""
   uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: "spike bit"
+  uio[4]: "Neuron 1 Spike"
+  uio[5]: "Neuron 2 Spike"
+  uio[6]: "Neuron 3 Spike"
+  uio[7]: "Neuron 4 Spike"
 
 # Do not change!
 yaml_version: 6

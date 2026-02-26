@@ -1,6 +1,6 @@
 `default_nettype none
 
-module lif(
+module Oscillator(
     input wire [7:0]    current,
     input wire          clk,
     input wire          reset_n,
@@ -14,14 +14,14 @@ module lif(
     always @(posedge clk) begin
         if (!reset_n) begin
             state <= 0;
-            threshold <= 200;
+            threshold <= 250;
         end else begin
             state <= next_state;
         end
     end
 
     // next state logic
-    assign next_state = current + (state >> 1);
+    assign next_state = (state >= threshold) ? 8'd0 : (current + (state >> 1)); 
 
     // spiking logic
     assign spike = (state >= threshold);
