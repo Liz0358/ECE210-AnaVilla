@@ -14,7 +14,7 @@ module Oscillator(
     always @(posedge clk) begin
         if (!reset_n) begin
             state <= 0;
-            threshold <= 250;
+            threshold <= 200;
         end else begin
             state <= next_state;
         end
